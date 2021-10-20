@@ -1,92 +1,181 @@
+
 package com.example.songify.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+
+@Generated("jsonschema2pojo")
 public class Cancion {
 
-    private long id;
-    private String titulo;
-    private String artista;
-    private String genero;
-    private String duracion;
-    private boolean favorito;
-    private boolean reproduciendo;
-    public Cancion(){
+    @SerializedName("platform")
+    @Expose
+    private String platform;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("artist")
+    @Expose
+    private String artist;
+    @SerializedName("artistLink")
+    @Expose
+    private String artistLink;
+    @SerializedName("album")
+    @Expose
+    private String album;
+    @SerializedName("albumLink")
+    @Expose
+    private String albumLink;
+    @SerializedName("isrc")
+    @Expose
+    private String isrc;
+    @SerializedName("duration")
+    @Expose
+    private String duration;
+    @SerializedName("trackLink")
+    @Expose
+    private String trackLink;
+    @SerializedName("preview")
+    @Expose
+    private String preview;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
+    @SerializedName("addedDate")
+    @Expose
+    private Integer addedDate;
+    @SerializedName("position")
+    @Expose
+    private String position;
+    @SerializedName("shareUrls")
+    @Expose
+    private List<Object> shareUrls = null;
 
+    public String getPlatform() {
+        return platform;
     }
 
-    public Cancion(long id, String titulo, String artista, String genero, String duracion) {
-        this.id = id;
-        this.titulo = titulo;
-        this.artista = artista;
-        this.genero = genero;
-        this.duracion = duracion;
-        favorito = false;
-        reproduciendo = false;
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getArtista() {
-        return artista;
+    public String getArtist() {
+        return artist;
     }
 
-    public void setArtista(String artista) {
-        this.artista = artista;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getArtistLink() {
+        return artistLink;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setArtistLink(String artistLink) {
+        this.artistLink = artistLink;
     }
 
-    public String getDuracion() {
-        return duracion;
+    public String getAlbum() {
+        return album;
     }
 
-    public void setDuracion(String duracion) {
-        this.duracion = duracion;
+    public void setAlbum(String album) {
+        this.album = album;
     }
 
-    public boolean isFavorito() {
-        return favorito;
+    public String getAlbumLink() {
+        return albumLink;
     }
 
-    public void setFavorito(boolean favorito) {
-        this.favorito = favorito;
+    public void setAlbumLink(String albumLink) {
+        this.albumLink = albumLink;
     }
 
-    public boolean isReproduciendo() {
-        return reproduciendo;
+    public String getIsrc() {
+        return isrc;
     }
 
-    public void setReproduciendo(boolean reproduciendo) {
-        this.reproduciendo = reproduciendo;
+    public void setIsrc(String isrc) {
+        this.isrc = isrc;
     }
 
-    @Override
-    public String toString() {
-        return "Cancion{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", artista='" + artista + '\'' +
-                ", genero='" + genero + '\'' +
-                ", duracion='" + duracion +
-                '}';
+    public String getDuration() {
+        return duration;
     }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getTrackLink() {
+        return trackLink;
+    }
+
+    public void setTrackLink(String trackLink) {
+        this.trackLink = trackLink;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public Integer getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(Integer addedDate) {
+        this.addedDate = addedDate;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public List<Object> getShareUrls() {
+        return shareUrls;
+    }
+
+    public void setShareUrls(List<Object> shareUrls) {
+        this.shareUrls = shareUrls;
+    }
+
 }

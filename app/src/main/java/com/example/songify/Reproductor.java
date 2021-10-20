@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.songify.model.Cancion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class reproductor extends AppCompatActivity {
+public class Reproductor extends AppCompatActivity {
     private Cancion cancion;
     private TextView nombreCancion;
     private TextView nombreArtista;

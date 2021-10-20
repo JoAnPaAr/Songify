@@ -25,6 +25,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/img_previous"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_play"
         app:layout_constraintStart_toEndOf="@+id/boton_stop" />
@@ -37,6 +38,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/img_next"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_repeat"
         app:layout_constraintStart_toEndOf="@+id/boton_play" />
@@ -47,6 +49,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/img_play"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -59,6 +62,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/img_repeat"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/boton_adelante" />
@@ -71,6 +75,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/img_stop"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_atras"
         app:layout_constraintHorizontal_bias="0.098"
@@ -102,6 +107,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/img_star"
+        android:hintTextColor="#1A237E"
+        android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.914"
