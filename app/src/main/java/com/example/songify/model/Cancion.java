@@ -61,6 +61,41 @@ public class Cancion {
 
     private boolean isReproduciendo;
 
+    public Cancion(String id, String title, String artist, String duration) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.duration = duration;
+    }
+
+    public Cancion(String id, String title, String artist, String duration, String picture) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.duration = duration;
+        this.picture = picture;
+    }
+
+    public Cancion(String platform, String id, String title, String artist, String artistLink, String album, String albumLink, String isrc, String duration, String trackLink, String preview, String picture, Integer addedDate, String position, List<Object> shareUrls) {
+        this.platform = platform;
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.artistLink = artistLink;
+        this.album = album;
+        this.albumLink = albumLink;
+        this.isrc = isrc;
+        this.duration = duration;
+        this.trackLink = trackLink;
+        this.preview = preview;
+        this.picture = picture;
+        this.addedDate = addedDate;
+        this.position = position;
+        this.shareUrls = shareUrls;
+        this.isFavorito = false;
+        this.isReproduciendo = false;
+    }
+
     public String getPlatform() {
         return platform;
     }
@@ -195,5 +230,28 @@ public class Cancion {
 
     public void setReproduciendo(boolean reproduciendo) {
         isReproduciendo = reproduciendo;
+    }
+
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "platform='" + platform + '\'' +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", artistLink='" + artistLink + '\'' +
+                ", album='" + album + '\'' +
+                ", albumLink='" + albumLink + '\'' +
+                ", isrc='" + isrc + '\'' +
+                ", duration='" + duration + '\'' +
+                ", trackLink='" + trackLink + '\'' +
+                ", preview='" + preview + '\'' +
+                ", picture='" + picture + '\'' +
+                ", addedDate=" + addedDate +
+                ", position='" + position + '\'' +
+                ", shareUrls=" + shareUrls +
+                ", isFavorito=" + isFavorito +
+                ", isReproduciendo=" + isReproduciendo +
+                '}';
     }
 }
