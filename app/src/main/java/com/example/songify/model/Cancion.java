@@ -57,6 +57,9 @@ public class Cancion {
     @SerializedName("shareUrls")
     @Expose
     private List<Object> shareUrls = null;
+    private boolean isFavorito;
+
+    private boolean isReproduciendo;
 
     public String getPlatform() {
         return platform;
@@ -178,4 +181,19 @@ public class Cancion {
         this.shareUrls = shareUrls;
     }
 
+    public boolean isFavorito() {
+        return isFavorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        isFavorito = favorito;
+    }
+
+    public boolean isReproduciendo() {
+        return isReproduciendo;
+    }
+
+    public void setReproduciendo(boolean reproduciendo) {
+        isReproduciendo = reproduciendo;
+    }
 }

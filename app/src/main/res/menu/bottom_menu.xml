@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/listaCanciones"
+        android:icon="@drawable/img_canciones"
+        android:title="Canciones" />
+    <item
+        android:id="@+id/favoritos"
+        android:icon="@drawable/img_star"
+        android:title="Favoritos" />
+    <item
+        android:id="@+id/listaExitos"
+        android:icon="@drawable/img_top"
+        android:title="Exitos" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_bottom"
+    app:startDestination="@id/listaCanciones">
+
+    <fragment
+        android:id="@+id/favoritos"
+        android:name="com.example.songify.Favoritos"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/listaExitos"
+        android:name="com.example.songify.ListaExitos"
+        android:label="fragment_lista_exitos"
+        tools:layout="@layout/fragment_lista_exitos" />
+    <fragment
+        android:id="@+id/listaCanciones"
+        android:name="com.example.songify.ListaCanciones"
+        android:label="fragment_lista_canciones"
+        tools:layout="@layout/fragment_lista_canciones" />
+</navigation>
