@@ -62,4 +62,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_duracion = itemView.findViewById(R.id.tv_cancion_duracion);
         }
     }
+
 }

@@ -6,7 +6,7 @@
         android:icon="@drawable/img_canciones"
         android:title="Canciones" />
     <item
-        android:id="@+id/favoritos"
+        android:id="@+id/listaFavoritos"
         android:icon="@drawable/img_star"
         android:title="Favoritos" />
     <item

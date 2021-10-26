@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
-    tools:context=".ui.canciones.Canciones">
+    android:background="#0AC"
+    tools:context=".ui.favoritos.Favoritos">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Cancion"
+        android:id="@+id/rv_Favoritos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
