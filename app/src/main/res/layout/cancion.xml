@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cancionUnicaLineaLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -31,7 +32,7 @@
         android:layout_width="67dp"
         android:layout_height="15dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toEndOf="@+id/iv_cancion_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_cancion_titulo" />
 
@@ -39,11 +40,12 @@
         android:id="@+id/tv_cancion_duracion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toEndOf="@+id/iv_cancion_img"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cancion_titulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_cancion_artista"
+        app:layout_constraintVertical_bias="0.267" />
 
     <View
         android:id="@+id/divider"
@@ -55,4 +57,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_cancion_artista" />
+
+    <ImageView
+        android:id="@+id/iv_fav_cancion"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/img_star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintStart_toEndOf="@+id/tv_cancion_duracion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.728" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

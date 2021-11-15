@@ -49,13 +49,13 @@ public class Reproductor extends AppCompatActivity {
     }
 
 
-    private void ColorBotonFav(){
+    public void ColorBotonFav(){
         if(this.cancion.isFavorito()){
-            fav.setImageResource(R.drawable.img_star);
+            fav.setBackgroundResource(R.drawable.img_star);
             Toast.makeText(this, "Eliminado de Favoritos", Toast.LENGTH_SHORT).show();
 
         }else{
-            fav.setImageResource(R.drawable.img_star_on);
+            fav.setBackgroundResource(R.drawable.img_star_on);
             Toast.makeText(this, "Favorito", Toast.LENGTH_SHORT).show();
         }
     }
@@ -64,13 +64,13 @@ public class Reproductor extends AppCompatActivity {
         if (cancion.isReproduciendo()){
             //En caso de estar reproduciendo una canción, se pausará
             //pause
-            play.setImageResource(R.drawable.img_pause);
+            play.setBackgroundResource(R.drawable.img_pause);
             Toast.makeText(this, "Pausa", Toast.LENGTH_SHORT).show();
 
         }else{
             //En caso de no estar reproduciendo una canción, la reproduce
             //play
-            play.setImageResource(R.drawable.img_play);
+            play.setBackgroundResource(R.drawable.img_play);
             Toast.makeText(this, "Reproduciendo", Toast.LENGTH_SHORT).show();
         }
     }
@@ -79,12 +79,12 @@ public class Reproductor extends AppCompatActivity {
         //En caso de estar activa la repetición, la cancela
         if(isRepetir()){
             //no repetir
-            repeat.setImageResource(R.drawable.img_repeat);
+            repeat.setBackgroundResource(R.drawable.img_repeat);
             Toast.makeText(this, "No repetir", Toast.LENGTH_SHORT).show();
             //En caso de estar desactivada la repetición, la activa
         }else{
             //repetir
-            repeat.setImageResource(R.drawable.img_repeat_on);
+            repeat.setBackgroundResource(R.drawable.img_repeat_on);
             Toast.makeText(this, "Repetir", Toast.LENGTH_SHORT).show();
         }
     }

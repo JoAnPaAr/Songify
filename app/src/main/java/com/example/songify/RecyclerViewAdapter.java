@@ -25,6 +25,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context;
     }
 
+    public RecyclerViewAdapter(List<Cancion> cancionList) {
+        this.cancionList = cancionList;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,7 +44,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tv_duracion.setText(cancionList.get(position).getDuration());
         //Se emplea glide para insertar la imagen en iv_cancion_img
         Glide.with(this.context).load(cancionList.get(position).getPicture()).into(holder.iv_cancion);
+        //Actualizar favoritos
+        if (cancionList.get(position).isFavorito()) {
+            holder.btn_fav.setBackgroundResource(R.drawable.img_star_on);
+        } else {
+            holder.btn_fav.setBackgroundResource(R.drawable.img_star);
+        }
+        holder.btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cancion cancionItem = cancionList.get(holder.getAdapterPosition());
 
+                if (cancionItem.isFavorito()) {
+                    cancionItem.setFavorito(false);
+                    holder.btn_fav.setBackgroundResource(R.drawable.img_star);
+
+                } else {
+                    cancionItem.setFavorito(true);
+                    holder.btn_fav.setBackgroundResource(R.drawable.img_star_on);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,6 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tv_titulo;
         TextView tv_artista;
         TextView tv_duracion;
+        ImageView btn_fav;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_titulo = itemView.findViewById(R.id.tv_cancion_titulo);
             tv_artista = itemView.findViewById(R.id.tv_cancion_artista);
             tv_duracion = itemView.findViewById(R.id.tv_cancion_duracion);
+            btn_fav = itemView.findViewById(R.id.iv_fav_cancion);
         }
     }
 

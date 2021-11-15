@@ -74,6 +74,8 @@ public class Cancion {
         this.artist = artist;
         this.duration = duration;
         this.picture = picture;
+        this.isFavorito = false;
+        this.isReproduciendo = false;
     }
 
     public Cancion(String platform, String id, String title, String artist, String artistLink, String album, String albumLink, String isrc, String duration, String trackLink, String preview, String picture, Integer addedDate, String position, List<Object> shareUrls) {
