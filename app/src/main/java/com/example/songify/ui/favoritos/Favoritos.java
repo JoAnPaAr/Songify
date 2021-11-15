@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
-import com.example.songify.model.Cancion;
+import com.example.songify.roomdb.Cancion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,9 +77,14 @@ public class Favoritos extends Fragment {
 
         listaFavoritos = new ArrayList<Cancion>();
         fillListaFavoritos();
+        initRecyclerViewFavoritos(vista);
 
+        return vista;
+    }
+
+    //Se inicia la recyclerview
+    private void initRecyclerViewFavoritos(View vista) {
         recyclerFavoritos = vista.findViewById(R.id.rv_Favoritos);
-        //recyclerCanciones.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerFavoritos.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getContext());
@@ -87,8 +92,13 @@ public class Favoritos extends Fragment {
 
         mAdapter = new RecyclerViewAdapter(listaFavoritos, getContext());
         recyclerFavoritos.setAdapter(mAdapter);
-        return vista;
     }
+
+    //Carga las canciones que se encuentren en la base de datos marcadas como favoritas
+//    private void fillListaFavoritos() {
+//        CancionDatabase db = CancionDatabase.getInstance(getContext());
+//        listaFavoritos = db.getDao().getAllFavorites();
+//    }
 
     private void fillListaFavoritos() {
         Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg");

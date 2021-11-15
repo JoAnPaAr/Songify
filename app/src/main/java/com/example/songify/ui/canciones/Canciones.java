@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
-import com.example.songify.model.Cancion;
+import com.example.songify.roomdb.Cancion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,9 +77,14 @@ public class Canciones extends Fragment {
 
         listaCanciones = new ArrayList<Cancion>();
         fillListaCancion();
+        initRecyclerViewCanciones(vista);
 
+        return vista;
+    }
+
+    //Se inicia la recyclerview
+    private void initRecyclerViewCanciones(View vista) {
         recyclerCanciones = vista.findViewById(R.id.rv_Cancion);
-        //recyclerCanciones.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerCanciones.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getContext());
@@ -87,9 +92,20 @@ public class Canciones extends Fragment {
 
         mAdapter = new RecyclerViewAdapter(listaCanciones, getContext());
         recyclerCanciones.setAdapter(mAdapter);
-
-        return vista;
     }
+
+    //Carga las canciones que se encuentren en la base de datos
+//    public void fillListaCancion() {
+//        Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg");
+//
+//        CancionDatabase db = CancionDatabase.getInstance(getContext());
+//        if (db.getDao().getAllCanciones().isEmpty()) {
+//            listaCanciones.add(c0);
+//        } else {
+//            listaCanciones = db.getDao().getAllCanciones();
+//
+//        }
+//    }
 
     //(String id, String title, String artist, String duration)
     private void fillListaCancion() {

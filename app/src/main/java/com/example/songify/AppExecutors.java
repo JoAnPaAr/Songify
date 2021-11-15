@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.songify.ui;
+package com.example.songify;
 
 import android.os.Handler;
 import android.os.Looper;

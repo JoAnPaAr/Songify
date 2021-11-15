@@ -12,29 +12,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.songify.model.Cancion;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
-
-    public enum selectList {
-        LISTA_CANCIONES, LISTA_FAVORITOS, LISTA_EXITOS;
-    }
 
     private AppBarConfiguration mAppBarConfiguration;
     private Object BottomNavigationView;
 
-    Menu menu;
-    List<Cancion> listaCanciones = new ArrayList<Cancion>();
-
-    private RecyclerView recyclerViewCancion;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
     }
-
 
 
     @Override

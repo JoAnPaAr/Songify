@@ -1,5 +1,10 @@
 
-package com.example.songify.model;
+package com.example.songify.roomdb;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,58 +14,98 @@ import java.util.List;
 import javax.annotation.Generated;
 
 
+@Entity(tableName = "cancion")
 @Generated("jsonschema2pojo")
 public class Cancion {
 
+    @Ignore
     @SerializedName("platform")
     @Expose
     private String platform;
+
+    //ID de la cancion
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     @Expose
     private String id;
+
+    //Titulo de la cancion
+    @ColumnInfo(name = "titulo")
     @SerializedName("title")
     @Expose
     private String title;
+
+    //Artista de la cancion
+    @ColumnInfo(name = "artista")
     @SerializedName("artist")
     @Expose
     private String artist;
+
+    @Ignore
     @SerializedName("artistLink")
     @Expose
     private String artistLink;
+
+    @Ignore
     @SerializedName("album")
     @Expose
     private String album;
+
+    @Ignore
     @SerializedName("albumLink")
     @Expose
     private String albumLink;
+
+    @Ignore
     @SerializedName("isrc")
     @Expose
     private String isrc;
+
+    //Duracion de la cancion
+    @ColumnInfo(name = "duracion")
     @SerializedName("duration")
     @Expose
     private String duration;
+
+    @Ignore
     @SerializedName("trackLink")
     @Expose
     private String trackLink;
+
+    //URL de la cancion
+    @ColumnInfo(name = "url_mp3")
     @SerializedName("preview")
     @Expose
     private String preview;
+
+    //Imagen de la cancion
+    @ColumnInfo(name = "url_imagen")
     @SerializedName("picture")
     @Expose
     private String picture;
+
+    @Ignore
     @SerializedName("addedDate")
     @Expose
     private Integer addedDate;
+
+    //Ranking de la cancion
+    @ColumnInfo(name = "ranking")
     @SerializedName("position")
     @Expose
     private String position;
+
+    @Ignore
     @SerializedName("shareUrls")
     @Expose
     private List<Object> shareUrls = null;
+
     private boolean isFavorito;
 
+    @Ignore
     private boolean isReproduciendo;
 
+    @Ignore
     public Cancion(String id, String title, String artist, String duration) {
         this.id = id;
         this.title = title;
@@ -68,6 +113,7 @@ public class Cancion {
         this.duration = duration;
     }
 
+    @Ignore
     public Cancion(String id, String title, String artist, String duration, String picture) {
         this.id = id;
         this.title = title;
@@ -78,6 +124,7 @@ public class Cancion {
         this.isReproduciendo = false;
     }
 
+    @Ignore
     public Cancion(String platform, String id, String title, String artist, String artistLink, String album, String albumLink, String isrc, String duration, String trackLink, String preview, String picture, Integer addedDate, String position, List<Object> shareUrls) {
         this.platform = platform;
         this.id = id;

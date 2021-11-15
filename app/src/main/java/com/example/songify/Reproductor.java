@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.songify.model.Cancion;
+import com.example.songify.roomdb.Cancion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Reproductor extends AppCompatActivity {
