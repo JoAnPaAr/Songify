@@ -15,10 +15,11 @@ import com.example.songify.roomdb.Cancion;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>implements View.OnClickListener {
 
     List<Cancion> cancionList;
     Context context;
+    private View.OnClickListener listener;
 
 
     public RecyclerViewAdapter(List<Cancion> cancionList, Context context) {
@@ -35,6 +36,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cancion, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
+
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -73,6 +76,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return cancionList.size();
     }
 
+    //Metodo que escucha el onClick
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener!=null){
+            listener.onClick(view);
+        }
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_cancion;
         TextView tv_titulo;
@@ -89,5 +104,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             btn_fav = itemView.findViewById(R.id.iv_fav_cancion);
         }
     }
-
 }

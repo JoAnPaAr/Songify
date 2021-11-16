@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +35,7 @@ public class Favoritos extends Fragment {
     private String mParam2;
 
     private RecyclerView recyclerFavoritos;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     List<Cancion> listaFavoritos;
 
@@ -91,6 +92,14 @@ public class Favoritos extends Fragment {
         recyclerFavoritos.setLayoutManager(layoutManager);
 
         mAdapter = new RecyclerViewAdapter(listaFavoritos, getContext());
+        mAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "HASIDOPULSADO: " +
+                                listaFavoritos.get(recyclerFavoritos.getChildAdapterPosition(view)).getTitle(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerFavoritos.setAdapter(mAdapter);
     }
 

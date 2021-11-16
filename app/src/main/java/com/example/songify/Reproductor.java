@@ -61,7 +61,7 @@ public class Reproductor extends AppCompatActivity {
     }
 
     public void PlayPause (View view){
-        if (cancion.isReproduciendo()){
+        if (true){
             //En caso de estar reproduciendo una canción, se pausará
             //pause
             play.setBackgroundResource(R.drawable.img_pause);
