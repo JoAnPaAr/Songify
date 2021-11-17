@@ -125,6 +125,18 @@ public class Cancion {
     }
 
     @Ignore
+    public Cancion(String id, String title, String artist, String duration, String picture, String preview) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.duration = duration;
+        this.picture = picture;
+        this.preview = preview;
+        this.isFavorito = false;
+        this.isReproduciendo = false;
+    }
+
+    @Ignore
     public Cancion(String platform, String id, String title, String artist, String artistLink, String album, String albumLink, String isrc, String duration, String trackLink, String preview, String picture, Integer addedDate, String position, List<Object> shareUrls) {
         this.platform = platform;
         this.id = id;

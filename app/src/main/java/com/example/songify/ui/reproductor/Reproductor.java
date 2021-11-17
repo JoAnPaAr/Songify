@@ -124,13 +124,9 @@
 //        //En caso de estar activa la repetición, la cancela
 //        if (true) {
 //            //no repetir
-//            repeat.setBackgroundResource(R.drawable.img_repeat);
-//            Toast.makeText(getContext(), "No repetir", Toast.LENGTH_SHORT).show();
 //            //En caso de estar desactivada la repetición, la activa
 //        } else {
 //            //repetir
-//            repeat.setBackgroundResource(R.drawable.img_repeat_on);
-//            Toast.makeText(getContext(), "Repetir", Toast.LENGTH_SHORT).show();
 //        }
 //    }
 //}

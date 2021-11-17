@@ -77,8 +77,11 @@ public class Canciones extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_lista_canciones, container, false);
 
+        //En este array se almacenaran todas las canciones
         listaCanciones = new ArrayList<Cancion>();
+        //En este metodo se llena el array listaCanciones
         fillListaCancion();
+        //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
         initRecyclerViewCanciones(vista);
 
         return vista;
@@ -86,27 +89,44 @@ public class Canciones extends Fragment {
 
     //Se inicia la recyclerview
     private void initRecyclerViewCanciones(View vista) {
+
+        //Se vincula el recyclerView con su layout correspondiente
         recyclerCanciones = vista.findViewById(R.id.rv_Cancion);
         recyclerCanciones.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerCanciones.setLayoutManager(layoutManager);
 
+        //Se crea el adapter de la RecyclerView
         mAdapter = new RecyclerViewAdapter(listaCanciones, getContext());
         mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
+                final String id = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getId().toString();
                 final String titulo = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getTitle().toString();
                 final String artista = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getArtist().toString();
                 final String caratula = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPicture().toString();
+                final String urlcancion = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPreview().toString();
+                final String duration = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPreview().toString();
+
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
+
+                //Pasa los valores de la cancion escogida por el usuario
+                // para emplearlos en el reproductor
+                intent.putExtra("ID", id);
                 intent.putExtra("TITULO", titulo);
                 intent.putExtra("ARTISTA", artista);
-                intent.putExtra("CARATULA",caratula);
+                intent.putExtra("CARATULA", caratula);
+                intent.putExtra("URL", urlcancion);
 
+                //Pasa la lista completa
+                //intent.putExtra("LIST", (Serializable) listaCanciones);
 
+                //Invoca la nueva activity
                 startActivity(intent);
             }
         });
@@ -115,20 +135,19 @@ public class Canciones extends Fragment {
 
     //Carga las canciones que se encuentren en la base de datos
 //    public void fillListaCancion() {
-//        Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg");
 //
 //        CancionDatabase db = CancionDatabase.getInstance(getContext());
 //        if (db.getDao().getAllCanciones().isEmpty()) {
-//            listaCanciones.add(c0);
 //        } else {
 //            listaCanciones = db.getDao().getAllCanciones();
 //
 //        }
 //    }
 
-    //(String id, String title, String artist, String duration)
+    //(String id, String title, String artist, String duration,String preview)
     private void fillListaCancion() {
-        Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg");
+        Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg",
+                "https://p.scdn.co/mp3-preview/d99e6b974944ce051359f2ce26b2deba044a46aa?cid=7d6e6a3d46f443159acf4529c6a2dd06");
         Cancion c1 = new Cancion("1", "Giants", "BeckyG", "230", "https://elrework.com/wp-content/uploads/2019/11/true-damage.jpg");
         Cancion c2 = new Cancion("2", "Pretty Fly", "Offspring", "300", "https://image.api.playstation.com/cdn/EP0006/BLES00228_00/6uTuRMgsl2znREnwsFv8jr7g33XENX1N.png");
         Cancion c3 = new Cancion("3", "Let's Go", "Stuck to the Sound", "240", "https://i1.sndcdn.com/artworks-000353762163-7bo5aj-t500x500.jpg");
