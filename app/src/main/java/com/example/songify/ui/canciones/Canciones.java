@@ -1,10 +1,10 @@
 package com.example.songify.ui.canciones;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
+import com.example.songify.ReproductorActivity;
 import com.example.songify.roomdb.Cancion;
 
 import java.util.ArrayList;
@@ -92,13 +93,21 @@ public class Canciones extends Fragment {
         recyclerCanciones.setLayoutManager(layoutManager);
 
         mAdapter = new RecyclerViewAdapter(listaCanciones, getContext());
-
         mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "HASIDOPULSADO: " +
-                                listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getTitle(),
-                        Toast.LENGTH_SHORT).show();
+                final String titulo = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getTitle().toString();
+                final String artista = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getArtist().toString();
+                final String caratula = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPicture().toString();
+                //Se obtiene el contexto del main activity
+                Intent intent = new Intent(view.getContext(),
+                        ReproductorActivity.class);
+                intent.putExtra("TITULO", titulo);
+                intent.putExtra("ARTISTA", artista);
+                intent.putExtra("CARATULA",caratula);
+
+
+                startActivity(intent);
             }
         });
         recyclerCanciones.setAdapter(mAdapter);

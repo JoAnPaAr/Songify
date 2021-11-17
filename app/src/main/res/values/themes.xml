@@ -30,7 +30,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Songify.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <style name="Theme.Songify.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -44,7 +44,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Songify.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="Theme.Songify.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

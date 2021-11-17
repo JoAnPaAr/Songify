@@ -20,4 +20,9 @@
         android:name="com.example.songify.ui.canciones.Canciones"
         android:label="Canciones"
         tools:layout="@layout/fragment_lista_canciones" />
+    <fragment
+        android:id="@+id/reproductor"
+        android:name="com.example.songify.ui.reproductor.Reproductor"
+        android:label="Reproductor"
+        tools:layout="@layout/fragment_reproductor" />
 </navigation>

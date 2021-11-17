@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ReproductorActivity"
     android:background="#62A8A4">
 
     <ImageView
-        android:id="@+id/reproductor_default"
+        android:id="@+id/caratula_default"
         android:layout_width="304dp"
         android:layout_height="343dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,62 +20,12 @@
         app:srcCompat="@drawable/cassete" />
 
     <Button
-        android:id="@+id/boton_atras"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="130dp"
-        android:background="@drawable/img_previous"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/boton_play"
-        app:layout_constraintStart_toEndOf="@+id/boton_stop" />
-
-    <Button
-        android:id="@+id/boton_adelante"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="130dp"
-        android:background="@drawable/img_next"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/boton_repeat"
-        app:layout_constraintStart_toEndOf="@+id/boton_play" />
-
-    <Button
-        android:id="@+id/boton_play"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="130dp"
-        android:background="@drawable/img_play"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/boton_repeat"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="130dp"
-        android:background="@drawable/img_repeat"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boton_adelante" />
-
-    <Button
         android:id="@+id/boton_stop"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="88dp"
         android:background="@drawable/img_stop"
         android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,14 +33,66 @@
         app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/boton_play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/img_play"
+        android:textColorHint="#1A237E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/boton_adelante"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/img_next"
+        android:textColorHint="#1A237E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/boton_repeat"
+        app:layout_constraintStart_toEndOf="@+id/boton_play" />
+
+    <Button
+        android:id="@+id/boton_repeat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/img_repeat"
+        android:textColorHint="#1A237E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/boton_adelante" />
+
+    <Button
+        android:id="@+id/boton_atras"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/img_previous"
+        android:textColorHint="#1A237E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/boton_play"
+        app:layout_constraintStart_toEndOf="@+id/boton_stop" />
+
     <TextView
         android:id="@+id/tv_nombreCancion"
-        android:layout_width="173dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reproductor_default"
+        app:layout_constraintTop_toBottomOf="@+id/caratula_default"
         app:layout_constraintVertical_bias="0.144" />
 
     <TextView
