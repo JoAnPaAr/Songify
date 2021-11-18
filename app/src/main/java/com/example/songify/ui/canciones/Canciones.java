@@ -15,6 +15,7 @@ import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
 import com.example.songify.roomdb.Cancion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -105,23 +106,15 @@ public class Canciones extends Fragment {
 
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
                 final String id = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getId().toString();
-                final String titulo = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getTitle().toString();
-                final String artista = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getArtist().toString();
-                final String caratula = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPicture().toString();
-                final String urlcancion = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPreview().toString();
-                final String duration = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getPreview().toString();
-
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
 
-                //Pasa los valores de la cancion escogida por el usuario
-                // para emplearlos en el reproductor
+                //Pasa el valor del id de la cancion seleccionada por el usuario
                 intent.putExtra("ID", id);
-                intent.putExtra("TITULO", titulo);
-                intent.putExtra("ARTISTA", artista);
-                intent.putExtra("CARATULA", caratula);
-                intent.putExtra("URL", urlcancion);
+
+                //Pasa la lista de canciones al reproductor
+                intent.putExtra("LIST", (Serializable) listaCanciones);
 
                 //Pasa la lista completa
                 //intent.putExtra("LIST", (Serializable) listaCanciones);
@@ -146,16 +139,20 @@ public class Canciones extends Fragment {
 
     //(String id, String title, String artist, String duration,String preview)
     private void fillListaCancion() {
-        Cancion c0 = new Cancion("0", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg",
+        Cancion c0 = new Cancion("0000", "Cancion2", "Blur", "180", "https://img.discogs.com/SIySlohaBvKNM722OvT7NGpZxUg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-385550-1266624470.jpeg.jpg",
                 "https://p.scdn.co/mp3-preview/d99e6b974944ce051359f2ce26b2deba044a46aa?cid=7d6e6a3d46f443159acf4529c6a2dd06");
-        Cancion c1 = new Cancion("1", "Giants", "BeckyG", "230", "https://elrework.com/wp-content/uploads/2019/11/true-damage.jpg");
+        Cancion c1 = new Cancion("1", "Giants", "BeckyG", "230", "https://elrework.com/wp-content/uploads/2019/11/true-damage.jpg",
+                "https://p.scdn.co/mp3-preview/d11a4ca063cab7cbfbfbd5fa3732e977f4fc9300?cid=7d6e6a3d46f443159acf4529c6a2dd06");
+
         Cancion c2 = new Cancion("2", "Pretty Fly", "Offspring", "300", "https://image.api.playstation.com/cdn/EP0006/BLES00228_00/6uTuRMgsl2znREnwsFv8jr7g33XENX1N.png");
         Cancion c3 = new Cancion("3", "Let's Go", "Stuck to the Sound", "240", "https://i1.sndcdn.com/artworks-000353762163-7bo5aj-t500x500.jpg");
         Cancion c4 = new Cancion("4", "Taking Over", "LeagueOfLegends", "290", "https://m.media-amazon.com/images/I/91ApZlV-GBL._SS500_.jpg");
         Cancion c5 = new Cancion("5", "Star", "Lil Cake", "230", "https://s.mxmcdn.net/images-storage/albums5/6/4/3/4/0/6/56604346_500_500.jpg");
         Cancion c6 = new Cancion("6", "Onion", "PinnochioP", "90", "https://i1.sndcdn.com/artworks-000576487046-fdjb9g-t500x500.jpg");
         Cancion c7 = new Cancion("7", "Reloaded Installer #13", "LHSchiptunes", "217", "https://i.ytimg.com/vi/CYql_6MRNPU/sddefault.jpg");
-        Cancion c8 = new Cancion("8", "Lost Woods", "The Legend of Zelda", "120", "https://i.ytimg.com/vi/7RbdY_hcUAA/0.jpg");
+        Cancion c8 = new Cancion("8", "Lost Woods", "The Legend of Zelda", "120", "https://i.ytimg.com/vi/7RbdY_hcUAA/0.jpg",
+                "https://p.scdn.co/mp3-preview/c46c516a707f341073102b1b34d0431630100e5a?cid=7d6e6a3d46f443159acf4529c6a2dd06");
+
 
         listaCanciones.addAll(Arrays.asList(new Cancion[]{c0, c1, c2, c3, c4, c5, c6, c7, c8}));
     }

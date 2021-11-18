@@ -9,7 +9,11 @@
         android:id="@+id/listaFavoritos"
         android:name="com.example.songify.ui.favoritos.Favoritos"
         android:label="Favoritos"
-        tools:layout="@layout/fragment_lista_favoritos" />
+        tools:layout="@layout/fragment_lista_favoritos" >
+        <action
+            android:id="@+id/action_listaFavoritos_to_reproductorActivity"
+            app:destination="@id/reproductorActivity" />
+    </fragment>
     <fragment
         android:id="@+id/listaExitos"
         android:name="com.example.songify.ui.exitos.Exitos"
@@ -19,10 +23,14 @@
         android:id="@+id/listaCanciones"
         android:name="com.example.songify.ui.canciones.Canciones"
         android:label="Canciones"
-        tools:layout="@layout/fragment_lista_canciones" />
-    <fragment
-        android:id="@+id/reproductor"
-        android:name="com.example.songify.ui.reproductor.Reproductor"
-        android:label="Reproductor"
-        tools:layout="@layout/fragment_reproductor" />
+        tools:layout="@layout/fragment_lista_canciones" >
+        <action
+            android:id="@+id/action_listaCanciones_to_reproductorActivity"
+            app:destination="@id/reproductorActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/reproductorActivity"
+        android:name="com.example.songify.ReproductorActivity"
+        android:label="activity_reproductor"
+        tools:layout="@layout/activity_reproductor" />
 </navigation>

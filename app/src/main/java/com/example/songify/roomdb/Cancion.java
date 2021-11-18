@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -16,7 +17,7 @@ import javax.annotation.Generated;
 
 @Entity(tableName = "cancion")
 @Generated("jsonschema2pojo")
-public class Cancion {
+public class Cancion implements Serializable{
 
     @Ignore
     @SerializedName("platform")

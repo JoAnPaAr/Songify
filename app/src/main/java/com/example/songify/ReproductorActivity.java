@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
@@ -35,7 +37,7 @@ public class ReproductorActivity extends AppCompatActivity {
 
 
     //Variables de la activity
-    private String url_cancion;
+    private String url_cancion, id;
     private MediaPlayer mediaPlayer;
     private List<Cancion> listaCanciones;
     private boolean firstTime;
@@ -48,31 +50,18 @@ public class ReproductorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reproductor);
-
         //Inicializando las variables con los valores proporcionados del intent
-        String id = getIntent().getStringExtra("ID");
-        String titulo = getIntent().getStringExtra("TITULO");
-        String artista = getIntent().getStringExtra("ARTISTA");
-        String caratula = getIntent().getStringExtra("CARATULA");
-        url_cancion = getIntent().getStringExtra("URL");
 
-        //Para cuando se actualice la aplicacion en tiempo de ejecucion
-        //listaCanciones = (List<Cancion>) getIntent().getSerializableExtra("LIST");
+        //Obtiene la lista de canciones proporcionada por el intent
+        listaCanciones = (List<Cancion>) getIntent().getExtras().getSerializable("LIST");
+        id = getIntent().getStringExtra("ID");
 
         //En caso de que las variables no tengan contenido se les inicializa
         // a uno para evitar posibles errores
         if (id == null) {
             id = "";
         }
-        if (titulo == null) {
-            titulo = "";
-        }
-        if (artista == null) {
-            artista = "";
-        }
-        if (caratula == null) {
-            caratula = "";
-        }
+
         if (url_cancion == null) {
             url_cancion = "";
         }
@@ -82,15 +71,15 @@ public class ReproductorActivity extends AppCompatActivity {
 
         //Se inserta el nombre de la cancion que se ha pasado mediante intent
         nombreCancion = findViewById(R.id.tv_nombreCancion);
-        nombreCancion.setText(titulo);
+        nombreCancion.setText(listaCanciones.get(Integer.parseInt(id)).getTitle());
 
         //Se inserta el nombre del artista que se ha pasado mediante intent
         nombreArtista = findViewById(R.id.tv_nombreArtista);
-        nombreArtista.setText(artista);
+        nombreArtista.setText(listaCanciones.get(Integer.parseInt(id)).getArtist());
 
         //Se inserta la imagen de la cancion que se ha pasado mediante intent
         ivcaratula = findViewById(R.id.caratula_default);
-        Glide.with(this).load(caratula).into(ivcaratula);
+        Glide.with(this).load(listaCanciones.get(Integer.parseInt(id)).getPicture()).into(ivcaratula);
 
         //Vincular las variables con los botones del layout
         play = findViewById(R.id.boton_play);
@@ -101,14 +90,19 @@ public class ReproductorActivity extends AppCompatActivity {
         duracionActual = findViewById(R.id.tv_tiempo_actual);
         duracionTotal = findViewById(R.id.tv_tiempo_total);
 
-        //Inicializar el mediaPlayer
+        //Obtiene la instancia del MediaPlayer si existia una
+        // y si no, se crea una nueva
         mediaPlayer = new MediaPlayer();
 
         //Invoca el metodo que se encarga de manejar los eventos del reproductor
         reproducir();
 
+        //Inicializa el handler que se utilizara para
+        // llevar el progreso de la seekBar
         handler = new Handler();
 
+        //Este metodo se encarga de modificar el momento de la
+        // reproduccion a peticion del usuario
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -130,12 +124,22 @@ public class ReproductorActivity extends AppCompatActivity {
         });
     }
 
+    //Se habilita el boton UP para volver a la actividad padre
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     //Este metodo se encarga de manejar los eventos que puedan ocurrir en el reproductor
     private void reproducir() {
 
         //Obtiene el archivo que se va a reproducir
         try {
-            mediaPlayer.setDataSource(url_cancion);
+            mediaPlayer.setDataSource(listaCanciones.get(Integer.parseInt(id)).getPreview());
             mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
@@ -187,6 +191,51 @@ public class ReproductorActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        //En caso de pulsar el boton atras
+//        atras.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Se para la reproduccion
+//                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.stop();
+//                    play.setBackgroundResource(R.drawable.img_play);
+//                    mediaPlayer.release();
+//
+//                    //En caso de ser el primer elemento, el id se actualiza
+//                    // al ultimo de la lista
+//                    if (id == 0) {
+//                        id = Integer.parseInt(listaCanciones.get(listaCanciones.size() - 1).getId());
+//                    } else {
+//                        id = toString(Integer.parseInt(id) - 1);
+//                    }
+//                    onCreate(new Bundle());
+//
+//                }
+//            }
+//        });
+
+//        //En caso de pulsar el boton adelante
+//        adelante.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Se para la reproduccion
+//                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.stop();
+//                    play.setBackgroundResource(R.drawable.img_play);
+//                    mediaPlayer.release();
+//
+//                    //En caso de ser el ultimo elemento, el id se actualiza
+//                    // al primero de la lista
+//                    if (id == listaCanciones.size() - 1) {
+//                        id = Integer.parseInt(listaCanciones.get(0).getId());
+//                    } else {
+//                        id = id + 1;
+//                    }
+//                    onCreate(new Bundle());
+//                }
+//            }
+//        });
 
         //En caso de pulsar el boton stop
         stop.setOnClickListener(new View.OnClickListener() {
