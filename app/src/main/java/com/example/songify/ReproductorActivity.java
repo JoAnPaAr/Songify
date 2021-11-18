@@ -195,7 +195,7 @@ public class ReproductorActivity extends AppCompatActivity {
             }
         });
 
-//        //En caso de pulsar el boton atras
+        //En caso de pulsar el boton atras
 //        atras.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -203,17 +203,27 @@ public class ReproductorActivity extends AppCompatActivity {
 //                if (mediaPlayer.isPlaying()) {
 //                    mediaPlayer.stop();
 //                    play.setBackgroundResource(R.drawable.img_play);
-//                    mediaPlayer.release();
 //
 //                    //En caso de ser el primer elemento, el id se actualiza
 //                    // al ultimo de la lista
-//                    if (id == 0) {
-//                        id = Integer.parseInt(listaCanciones.get(listaCanciones.size() - 1).getId());
+//                    if (Integer.parseInt(id) == 0) {
+//                        id = listaCanciones.get(listaCanciones.size() - 1).getId();
 //                    } else {
-//                        id = toString(Integer.parseInt(id) - 1);
+//                        int aux = Integer.parseInt(listaCanciones.get(Integer.parseInt(id)).getId()) - 1;
+//                        id.format("%d", aux);
 //                    }
-//                    onCreate(new Bundle());
+//                    //Se obtiene el contexto del main activity
+//                    Intent intent = new Intent(view.getContext(),
+//                            ReproductorActivity.class);
 //
+//                    //Pasa el valor del id de la cancion seleccionada por el usuario
+//                    intent.putExtra("ID", id);
+//
+//                    //Pasa la lista de canciones al reproductor
+//                    intent.putExtra("LIST", (Serializable) listaCanciones);
+//
+//                    //Invoca la nueva activity
+//                    startActivity(intent);
 //                }
 //            }
 //        });
@@ -226,16 +236,15 @@ public class ReproductorActivity extends AppCompatActivity {
 //                if (mediaPlayer.isPlaying()) {
 //                    mediaPlayer.stop();
 //                    play.setBackgroundResource(R.drawable.img_play);
-//                    mediaPlayer.release();
 //
 //                    //En caso de ser el ultimo elemento, el id se actualiza
 //                    // al primero de la lista
-//                    if (id == listaCanciones.size() - 1) {
-//                        id = Integer.parseInt(listaCanciones.get(0).getId());
+//                    if (Integer.parseInt(id) == listaCanciones.size() - 1) {
+//                        id.format("%d", 0);
 //                    } else {
-//                        id = id + 1;
+//                        int aux = Integer.parseInt(listaCanciones.get(Integer.parseInt(id)).getId()) + 1;
+//                        id.format("%d", aux);
 //                    }
-//                    onCreate(new Bundle());
 //                }
 //            }
 //        });

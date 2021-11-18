@@ -6,8 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
+import com.example.songify.RecyclerViewAdapter;
+import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +32,11 @@ public class Exitos extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerExitos;
+    private RecyclerViewAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    List<Cancion> listaExitos;
 
     public Exitos() {
         // Required empty public constructor
@@ -60,6 +73,29 @@ public class Exitos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_exitos, container, false);
+        View vista = inflater.inflate(R.layout.fragment_lista_exitos, container, false);
+
+        //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
+        initRecyclerViewCanciones(vista);
+
+        return vista;
+    }
+
+
+    //Se inicia la recyclerview
+    private void initRecyclerViewCanciones(View vista) {
+
+        //Se vincula el recyclerView con su layout correspondiente
+        recyclerExitos = vista.findViewById(R.id.rv_Exitos);
+        recyclerExitos.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(vista.getContext());
+        recyclerExitos.setLayoutManager(layoutManager);
+
+        mAdapter = new RecyclerViewAdapter(new ArrayList<>(), vista.getContext());
+
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
+        mAdapter.swap(cancionDatabase.getDao().showRanking());
+        recyclerExitos.setAdapter(mAdapter);
     }
 }

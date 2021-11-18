@@ -13,7 +13,7 @@ public abstract class CancionDatabase extends RoomDatabase {
 
     public static CancionDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context, CancionDatabase.class, "DB_CANCIONES.db").build();
+            INSTANCE = Room.databaseBuilder(context, CancionDatabase.class, "canciones.db").allowMainThreadQueries().build();
         }
         return INSTANCE;
     }

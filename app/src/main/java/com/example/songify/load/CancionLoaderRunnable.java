@@ -28,6 +28,12 @@ public class CancionLoaderRunnable implements Runnable {
         // Parse JsonReader into list of Repo using Gson
         List<Cancion> listaCanciones = Arrays.asList(new Gson().fromJson(reader, Cancion[].class));
 
-        AppExecutors.getInstance().mainThread().execute(() -> mOnResponseLoadedListener.onResponseLoaded(listaCanciones));
+        AppExecutors.getInstance().mainThread().execute(new Runnable() {
+            @Override
+            public void run() {
+                mOnResponseLoadedListener.onResponseLoaded(listaCanciones);
+
+            }
+        });
     }
 }

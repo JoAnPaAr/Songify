@@ -10,18 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.songify.AppExecutors;
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
-import com.example.songify.retrofit.CancionesNetworkLoaderRunnable;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +39,6 @@ public class Canciones extends Fragment {
     private RecyclerView recyclerCanciones;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Retrofit retrofit;
     List<Cancion> listaCanciones;
 
     public Canciones() {
@@ -81,8 +77,7 @@ public class Canciones extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_lista_canciones, container, false);
-        //Este metodo llena la lista de canciones
-       // fillListaCancion();
+
         //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
         initRecyclerViewCanciones(vista);
 
@@ -102,7 +97,8 @@ public class Canciones extends Fragment {
 
         mAdapter = new RecyclerViewAdapter(new ArrayList<>(), vista.getContext());
 
-        AppExecutors.getInstance().networkIO().execute(new CancionesNetworkLoaderRunnable(listaCanciones -> mAdapter.swap(listaCanciones)));
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
+        mAdapter.swap(cancionDatabase.getDao().getAllCanciones());
 
         //Se envia la cancion seleccionada al reproductor
         mAdapter.setOnClickListener(new View.OnClickListener() {
@@ -126,17 +122,7 @@ public class Canciones extends Fragment {
             }
         });
         recyclerCanciones.setAdapter(mAdapter);
+
     }
-
-
-    //Carga las canciones que se encuentren en la base de datos
-//    public void fillListaCancion() {
-//
-//        CancionDatabase db = CancionDatabase.getInstance(getContext());
-//        if (db.getDao().getAllCanciones().isEmpty()) {
-//        } else {
-//            listaCanciones = db.getDao().getAllCanciones();
-//        }
-//    }
 
 }

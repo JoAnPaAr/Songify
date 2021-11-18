@@ -14,7 +14,7 @@ public interface CancionDAO {
     @Query("SELECT * FROM cancion")
     public List<Cancion> getAllCanciones();
 
-    @Query("SELECT * FROM cancion WHERE isFavorito = 'TRUE'")
+    @Query("SELECT * FROM cancion WHERE fav = 1")
     public List<Cancion> getAllFavorites();
 
     @Insert
@@ -28,4 +28,7 @@ public interface CancionDAO {
 
     @Update
     public int update(Cancion cancion);
+
+    @Query("SELECT * FROM cancion ORDER BY ranking ASC")
+    public  List<Cancion>  showRanking();
 }

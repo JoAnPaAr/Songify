@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDatabase;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(this.context);
         holder.tv_titulo.setText(cancionList.get(position).getTitle());
         holder.tv_artista.setText(cancionList.get(position).getArtist());
         holder.tv_duracion.setText(cancionList.get(position).getDuration());
@@ -62,10 +64,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 if (cancionItem.isFavorito()) {
                     cancionItem.setFavorito(false);
                     holder.btn_fav.setBackgroundResource(R.drawable.img_star);
-
+                    cancionDatabase.getDao().update(cancionItem);
                 } else {
                     cancionItem.setFavorito(true);
                     holder.btn_fav.setBackgroundResource(R.drawable.img_star_on);
+                    cancionDatabase.getDao().update(cancionItem);
                 }
             }
         });

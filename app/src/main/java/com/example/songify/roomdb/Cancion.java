@@ -1,6 +1,7 @@
 
 package com.example.songify.roomdb;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -17,7 +18,7 @@ import javax.annotation.Generated;
 
 @Entity(tableName = "cancion")
 @Generated("jsonschema2pojo")
-public class Cancion implements Serializable{
+public class Cancion implements Serializable {
 
     @Ignore
     @SerializedName("platform")
@@ -25,9 +26,10 @@ public class Cancion implements Serializable{
     private String platform;
 
     //ID de la cancion
-    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     @Expose
+    @PrimaryKey
+    @NonNull
     private String id;
 
     //Titulo de la cancion
@@ -101,10 +103,9 @@ public class Cancion implements Serializable{
     @Expose
     private List<Object> shareUrls = null;
 
+    //Cancion favorita
+    @ColumnInfo(name = "fav")
     private boolean isFavorito;
-
-    @Ignore
-    private boolean isReproduciendo;
 
     @Ignore
     public Cancion(String id, String title, String artist, String duration) {
@@ -122,10 +123,8 @@ public class Cancion implements Serializable{
         this.duration = duration;
         this.picture = picture;
         this.isFavorito = false;
-        this.isReproduciendo = false;
     }
 
-    @Ignore
     public Cancion(String id, String title, String artist, String duration, String picture, String preview) {
         this.id = id;
         this.title = title;
@@ -134,7 +133,6 @@ public class Cancion implements Serializable{
         this.picture = picture;
         this.preview = preview;
         this.isFavorito = false;
-        this.isReproduciendo = false;
     }
 
     @Ignore
@@ -155,7 +153,6 @@ public class Cancion implements Serializable{
         this.position = position;
         this.shareUrls = shareUrls;
         this.isFavorito = false;
-        this.isReproduciendo = false;
     }
 
     public String getPlatform() {
@@ -286,14 +283,6 @@ public class Cancion implements Serializable{
         isFavorito = favorito;
     }
 
-    public boolean isReproduciendo() {
-        return isReproduciendo;
-    }
-
-    public void setReproduciendo(boolean reproduciendo) {
-        isReproduciendo = reproduciendo;
-    }
-
     @Override
     public String toString() {
         return "Cancion{" +
@@ -313,7 +302,6 @@ public class Cancion implements Serializable{
                 ", position='" + position + '\'' +
                 ", shareUrls=" + shareUrls +
                 ", isFavorito=" + isFavorito +
-                ", isReproduciendo=" + isReproduciendo +
                 '}';
     }
 }

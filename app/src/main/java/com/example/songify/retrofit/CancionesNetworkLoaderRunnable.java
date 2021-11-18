@@ -27,11 +27,12 @@ public class CancionesNetworkLoaderRunnable implements Runnable {
         //Retrofit crea una instancia de la clase declarada previamente
         CancionesService service = retrofit.create(CancionesService.class);
         try {
-            List<Cancion> listaCanciones = service.getAllCanciones().execute().body();
+            List<Cancion> canciones = service.getAllCanciones().execute().body();
+
             AppExecutors.getInstance().mainThread().execute(new Runnable() {
                 @Override
                 public void run() {
-                    mOnCancionesLoadedListener.onResponseLoaded(listaCanciones);
+                    mOnCancionesLoadedListener.onResponseLoaded(canciones);
                 }
             });
         } catch (IOException e) {
