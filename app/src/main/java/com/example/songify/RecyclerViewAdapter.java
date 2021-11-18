@@ -15,7 +15,7 @@ import com.example.songify.roomdb.Cancion;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>implements View.OnClickListener {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> implements View.OnClickListener {
 
     List<Cancion> cancionList;
     Context context;
@@ -77,15 +77,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     //Metodo que escucha el onClick
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public void onClick(View view) {
-        if(listener!=null){
+        if (listener != null) {
             listener.onClick(view);
         }
+    }
+
+    public void swap(List<Cancion> dataset) {
+        cancionList = dataset;
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

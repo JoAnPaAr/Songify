@@ -55,7 +55,6 @@ public class ReproductorActivity extends AppCompatActivity {
         //Obtiene la lista de canciones proporcionada por el intent
         listaCanciones = (List<Cancion>) getIntent().getExtras().getSerializable("LIST");
         id = getIntent().getStringExtra("ID");
-
         //En caso de que las variables no tengan contenido se les inicializa
         // a uno para evitar posibles errores
         if (id == null) {
@@ -139,8 +138,12 @@ public class ReproductorActivity extends AppCompatActivity {
 
         //Obtiene el archivo que se va a reproducir
         try {
-            mediaPlayer.setDataSource(listaCanciones.get(Integer.parseInt(id)).getPreview());
-            mediaPlayer.prepareAsync();
+            if (listaCanciones.get(Integer.parseInt(id)).getPreview() == null) {
+                Toast.makeText(this, "No se ha encontrado archivo", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.setDataSource(listaCanciones.get(Integer.parseInt(id)).getPreview());
+                mediaPlayer.prepareAsync();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
