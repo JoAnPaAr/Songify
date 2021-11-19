@@ -16,6 +16,7 @@ import androidx.core.app.NavUtils;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,6 +45,7 @@ public class ReproductorActivity extends AppCompatActivity {
     Runnable runnable;
     Handler handler;
     int minutes, seconds;
+    Cancion cancion;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -53,8 +55,10 @@ public class ReproductorActivity extends AppCompatActivity {
         //Inicializando las variables con los valores proporcionados del intent
 
         //Obtiene la lista de canciones proporcionada por el intent
-        listaCanciones = (List<Cancion>) getIntent().getExtras().getSerializable("LIST");
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
         id = getIntent().getStringExtra("ID");
+        cancion = cancionDatabase.getDao().getCancionPorID(id);
+
         //En caso de que las variables no tengan contenido se les inicializa
         // a uno para evitar posibles errores
         if (id == null) {
@@ -70,15 +74,15 @@ public class ReproductorActivity extends AppCompatActivity {
 
         //Se inserta el nombre de la cancion que se ha pasado mediante intent
         nombreCancion = findViewById(R.id.tv_nombreCancion);
-        nombreCancion.setText(listaCanciones.get(Integer.parseInt(id)).getTitle());
+        nombreCancion.setText(cancion.getTitle());
 
         //Se inserta el nombre del artista que se ha pasado mediante intent
         nombreArtista = findViewById(R.id.tv_nombreArtista);
-        nombreArtista.setText(listaCanciones.get(Integer.parseInt(id)).getArtist());
+        nombreArtista.setText(cancion.getArtist());
 
         //Se inserta la imagen de la cancion que se ha pasado mediante intent
         ivcaratula = findViewById(R.id.caratula_default);
-        Glide.with(this).load(listaCanciones.get(Integer.parseInt(id)).getPicture()).into(ivcaratula);
+        Glide.with(this).load(cancion.getPicture()).into(ivcaratula);
 
         //Vincular las variables con los botones del layout
         play = findViewById(R.id.boton_play);
@@ -138,10 +142,10 @@ public class ReproductorActivity extends AppCompatActivity {
 
         //Obtiene el archivo que se va a reproducir
         try {
-            if (listaCanciones.get(Integer.parseInt(id)).getPreview() == null) {
+            if (cancion.getPreview() == "") {
                 Toast.makeText(this, "No se ha encontrado archivo", Toast.LENGTH_SHORT).show();
             } else {
-                mediaPlayer.setDataSource(listaCanciones.get(Integer.parseInt(id)).getPreview());
+                mediaPlayer.setDataSource(cancion.getPreview());
                 mediaPlayer.prepareAsync();
             }
         } catch (IOException e) {

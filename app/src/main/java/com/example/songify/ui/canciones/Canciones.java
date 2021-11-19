@@ -16,7 +16,6 @@ import com.example.songify.ReproductorActivity;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,17 +104,15 @@ public class Canciones extends Fragment {
             @Override
             public void onClick(View view) {
 
+                listaCanciones=cancionDatabase.getDao().getAllCanciones();
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
-                final String id = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getId().toString();
+                final String id = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getId();
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
 
                 //Pasa el valor del id de la cancion seleccionada por el usuario
                 intent.putExtra("ID", id);
-
-                //Pasa la lista de canciones al reproductor
-                intent.putExtra("LIST", (Serializable) listaCanciones);
 
                 //Invoca la nueva activity
                 startActivity(intent);

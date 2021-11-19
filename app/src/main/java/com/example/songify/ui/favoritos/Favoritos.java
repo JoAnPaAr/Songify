@@ -13,19 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
-import com.example.songify.retrofit.CancionesService;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,13 +76,13 @@ public class Favoritos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_lista_favoritos, container, false);
-        //Este metodo llena la lista de canciones
-        // fillListaCancion();
+
         //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
         initRecyclerViewCanciones(vista);
 
         return vista;
     }
+
 
     //Se inicia la recyclerview
     private void initRecyclerViewCanciones(View vista) {
@@ -104,38 +96,17 @@ public class Favoritos extends Fragment {
 
         mAdapter = new RecyclerViewAdapter(new ArrayList<>(), vista.getContext());
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://raw.githubusercontent.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
+        mAdapter.swap(cancionDatabase.getDao().getAllFavorites());
 
-        CancionesService service = retrofit.create(CancionesService.class);
-
-        service.getAllCanciones().enqueue(new Callback<List<Cancion>>() {
-            @Override
-            public void onResponse(Call<List<Cancion>> call, Response<List<Cancion>> response) {
-                List<Cancion> cancionList = response.body();
-                listaFavoritos=cancionList;
-                CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
-//                Cancion c;
-//                for(int i = 0; i<cancionList.size();i++){
-//                    c=cancionList.get(i);
-//                    cancionDatabase.getDao().insertCancion(c);
-//                }
-                mAdapter.swap(cancionDatabase.getDao().getAllFavorites());
-            }
-
-            @Override
-            public void onFailure(Call<List<Cancion>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
         //Se envia la cancion seleccionada al reproductor
         mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                listaFavoritos = cancionDatabase.getDao().getAllFavorites();
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
-                final String id = listaFavoritos.get(recyclerFavoritos.getChildAdapterPosition(view)).getId().toString();
+                final String id = listaFavoritos.get(recyclerFavoritos.getChildAdapterPosition(view)).getId();
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
@@ -143,14 +114,12 @@ public class Favoritos extends Fragment {
                 //Pasa el valor del id de la cancion seleccionada por el usuario
                 intent.putExtra("ID", id);
 
-                //Pasa la lista de canciones al reproductor
-                intent.putExtra("LIST", (Serializable) listaFavoritos);
-
                 //Invoca la nueva activity
                 startActivity(intent);
             }
         });
         recyclerFavoritos.setAdapter(mAdapter);
+
     }
 
 }

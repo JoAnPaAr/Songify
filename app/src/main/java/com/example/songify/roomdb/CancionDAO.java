@@ -3,6 +3,7 @@ package com.example.songify.roomdb;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -17,7 +18,7 @@ public interface CancionDAO {
     @Query("SELECT * FROM cancion WHERE fav = 1")
     public List<Cancion> getAllFavorites();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertCancion(Cancion cancion);
 
     @Delete
@@ -31,4 +32,7 @@ public interface CancionDAO {
 
     @Query("SELECT * FROM cancion ORDER BY ranking ASC")
     public  List<Cancion>  showRanking();
+
+    @Query("SELECT * FROM cancion WHERE id LIKE :id")
+    public Cancion getCancionPorID(String id);
 }
