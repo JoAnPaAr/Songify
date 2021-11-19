@@ -35,65 +35,36 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="84dp"
         android:background="@drawable/img_stop"
         android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/boton_atras"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintEnd_toStartOf="@+id/boton_play"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/boton_play"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="84dp"
         android:background="@drawable/img_play"
         android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/boton_adelante"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/img_next"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_repeat"
-        app:layout_constraintStart_toEndOf="@+id/boton_play" />
+        app:layout_constraintHorizontal_bias="0.886"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/boton_repeat"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="84dp"
         android:background="@drawable/img_repeat"
         android:textColorHint="#1A237E"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boton_adelante" />
-
-    <ImageView
-        android:id="@+id/boton_atras"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/img_previous"
-        android:textColorHint="#1A237E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/boton_play"
-        app:layout_constraintStart_toEndOf="@+id/boton_stop" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tv_nombreCancion"
