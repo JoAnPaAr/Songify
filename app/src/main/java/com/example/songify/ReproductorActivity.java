@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
@@ -131,10 +131,21 @@ public class ReproductorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                this.onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     //Este metodo se encarga de manejar los eventos que puedan ocurrir en el reproductor
@@ -142,7 +153,7 @@ public class ReproductorActivity extends AppCompatActivity {
 
         //Obtiene el archivo que se va a reproducir
         try {
-            if (cancion.getPreview() == "") {
+            if (cancion.getPreview() == null) {
                 Toast.makeText(this, "No se ha encontrado archivo", Toast.LENGTH_SHORT).show();
             } else {
                 mediaPlayer.setDataSource(cancion.getPreview());
