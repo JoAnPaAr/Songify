@@ -11,6 +11,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -282,6 +283,34 @@ public class Cancion implements Serializable {
     public void setFavorito(boolean favorito) {
         isFavorito = favorito;
     }
+
+    public static Comparator<Cancion> CancionAZComparator = new Comparator<Cancion>() {
+        @Override
+        public int compare(Cancion c1, Cancion c2) {
+            return c1.getTitle().compareTo(c2.getTitle());
+        }
+    };
+
+    public static Comparator<Cancion> CancionZAComparator = new Comparator<Cancion>() {
+        @Override
+        public int compare(Cancion c1, Cancion c2) {
+            return c2.getTitle().compareTo(c1.getTitle());
+        }
+    };
+
+    public static Comparator<Cancion> CancionDurationComparator = new Comparator<Cancion>() {
+        @Override
+        public int compare(Cancion c1, Cancion c2) {
+            return c1.getDuration().compareTo(c2.getDuration());
+        }
+    };
+
+    public static Comparator<Cancion> CancionAZArtistComparator = new Comparator<Cancion>() {
+        @Override
+        public int compare(Cancion c1, Cancion c2) {
+            return c1.getArtist().compareTo(c2.getArtist());
+        }
+    };
 
     @Override
     public String toString() {

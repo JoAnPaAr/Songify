@@ -12,12 +12,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.retrofit.CancionesService;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private Object BottomNavigationView;
     List<Cancion> listaCanciones;
+    RecyclerViewAdapter myAdapter;
 
 
     @Override
@@ -57,27 +61,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
+        if (listaCanciones == null) {
+            listaCanciones = cancionDatabase.getDao().getAllCanciones();
+        }
         switch (item.getItemId()) {
             //Cuando se implemente liveData
-//            case R.id.menu_aToz:
-//                //ordena de A a Z
-//                Toast.makeText(this, "Ordenado de A->Z", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.menu_zToa:
-//                //ordena de Z a A
-//                Toast.makeText(this, "Ordenado de Z->A", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.menu_time:
-//                //ordena por duracion
-//                Toast.makeText(this, "Ordenado por Tiempo", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.menu_artistaToz:
-//                //ordena por Artistas
-//                Toast.makeText(this, "Ordenado por Artistas", Toast.LENGTH_SHORT).show();
-//                return true;
+            case R.id.menu_aToz:
+                //ordena de A a Z
+                Collections.sort(listaCanciones, Cancion.CancionAZComparator);
+                Toast.makeText(this, "Ordenado de A->Z", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_zToa:
+                //ordena de Z a A
+                Collections.sort(listaCanciones, Cancion.CancionZAComparator);
+                Toast.makeText(this, "Ordenado de Z->A", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_time:
+                //ordena por duracion
+                Collections.sort(listaCanciones, Cancion.CancionDurationComparator);
+                Toast.makeText(this, "Ordenado por Tiempo", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_artistaToz:
+                //ordena por Artistas
+                Collections.sort(listaCanciones,Cancion.CancionAZArtistComparator);
+                Toast.makeText(this, "Ordenado por Artistas", Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.menu_loadData:
                 //carga todos los datos
-                CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
                 fillLista();
                 return true;
             case R.id.menu_deleteData:

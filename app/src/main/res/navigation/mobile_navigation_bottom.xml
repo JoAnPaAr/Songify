@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listaFavoritos"
-        android:name="com.example.songify.ui.favoritos.Favoritos"
+        android:name="com.example.songify.ui.favoritos.FragmentFavoritos"
         android:label="Favoritos"
         tools:layout="@layout/fragment_lista_favoritos" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/listaExitos"
-        android:name="com.example.songify.ui.exitos.Exitos"
+        android:name="com.example.songify.ui.exitos.FragmentExitos"
         android:label="Exitos"
         tools:layout="@layout/fragment_lista_exitos" />
     <fragment
         android:id="@+id/listaCanciones"
-        android:name="com.example.songify.ui.canciones.Canciones"
+        android:name="com.example.songify.ui.canciones.FragmentCanciones"
         android:label="Canciones"
         tools:layout="@layout/fragment_lista_canciones" >
         <action

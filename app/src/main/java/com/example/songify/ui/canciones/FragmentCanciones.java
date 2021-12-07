@@ -21,10 +21,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Canciones#newInstance} factory method to
+ * Use the {@link FragmentCanciones#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Canciones extends Fragment {
+public class FragmentCanciones extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +40,7 @@ public class Canciones extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     List<Cancion> listaCanciones;
 
-    public Canciones() {
+    public FragmentCanciones() {
         // Required empty public constructor
     }
 
@@ -53,8 +53,8 @@ public class Canciones extends Fragment {
      * @return A new instance of fragment listaCanciones.
      */
     // TODO: Rename and change types and number of parameters
-    public static Canciones newInstance(String param1, String param2) {
-        Canciones fragment = new Canciones();
+    public static FragmentCanciones newInstance(String param1, String param2) {
+        FragmentCanciones fragment = new FragmentCanciones();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
