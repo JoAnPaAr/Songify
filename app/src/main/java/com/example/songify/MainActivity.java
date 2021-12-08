@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.retrofit.CancionesService;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDAO;
 import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.viewmodel.CancionViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Collection;
@@ -35,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private Object BottomNavigationView;
     List<Cancion> listaCanciones;
     RecyclerViewAdapter myAdapter;
-
+    private CancionDAO mCancionDao;
+    private CancionViewModel mCancionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-
+        mCancionViewModel = new ViewModelProvider(this).get(CancionViewModel.class);
     }
 
     @Override
@@ -62,29 +66,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
-        if (listaCanciones == null) {
-            listaCanciones = cancionDatabase.getDao().getAllCanciones();
-        }
         switch (item.getItemId()) {
             //Cuando se implemente liveData
             case R.id.menu_aToz:
                 //ordena de A a Z
-                Collections.sort(listaCanciones, Cancion.CancionAZComparator);
+                //Collections.sort(mCancionDao, Cancion.CancionAZComparator);
                 Toast.makeText(this, "Ordenado de A->Z", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_zToa:
                 //ordena de Z a A
-                Collections.sort(listaCanciones, Cancion.CancionZAComparator);
+                //Collections.sort(mCancionDao, Cancion.CancionZAComparator);
                 Toast.makeText(this, "Ordenado de Z->A", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_time:
                 //ordena por duracion
-                Collections.sort(listaCanciones, Cancion.CancionDurationComparator);
+                //Collections.sort(mCancionDao, Cancion.CancionDurationComparator);
                 Toast.makeText(this, "Ordenado por Tiempo", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_artistaToz:
                 //ordena por Artistas
-                Collections.sort(listaCanciones,Cancion.CancionAZArtistComparator);
+                //Collections.sort(mCancionDao,Cancion.CancionAZArtistComparator);
                 Toast.makeText(this, "Ordenado por Artistas", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_loadData:
@@ -93,12 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_deleteData:
                 //borra todos los datos
-                cancionDatabase = CancionDatabase.getInstance(this);
-                if (cancionDatabase.getDao().getAllCanciones() != null) {
-                    cancionDatabase.getDao().deleteAll();
-                } else {
-                    Toast.makeText(this, "No hay datos en la base de datos", Toast.LENGTH_SHORT).show();
-                }
+                mCancionViewModel.borrar();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -116,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Cancion>> call, Response<List<Cancion>> response) {
                 List<Cancion> cancionList = response.body();
                 listaCanciones = cancionList;
-                CancionDatabase cancionDatabase = CancionDatabase.getInstance(MainActivity.this);
                 Cancion c;
                 for (int i = 0; i < cancionList.size(); i++) {
                     c = cancionList.get(i);
-                    cancionDatabase.getDao().insertCancion(c);
+                    //Invocar al insert en viewmodel
+                    mCancionViewModel.insert(c);
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.example.songify.roomdb;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,26 +14,26 @@ import java.util.List;
 public interface CancionDAO {
 
     @Query("SELECT * FROM cancion")
-    public List<Cancion> getAllCanciones();
+    LiveData<List<Cancion>> getAllCanciones();
 
     @Query("SELECT * FROM cancion WHERE fav = 1")
-    public List<Cancion> getAllFavorites();
+    LiveData<List<Cancion>> getAllFavorites();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertCancion(Cancion cancion);
+    void insertCancion(Cancion cancion);
 
     @Delete
-    public void delete(Cancion cancion);
+    void delete(Cancion cancion);
 
     @Query("DELETE FROM cancion")
-    public void deleteAll();
+    void deleteAll();
 
     @Update
-    public int update(Cancion cancion);
+    int update(Cancion cancion);
 
     @Query("SELECT * FROM cancion ORDER BY ranking ASC")
-    public  List<Cancion>  showRanking();
+    LiveData<List<Cancion>>  showRanking();
 
     @Query("SELECT * FROM cancion WHERE id LIKE :id")
-    public Cancion getCancionPorID(String id);
+    Cancion getCancionPorID(String id);
 }

@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.viewmodel.CancionViewModel;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,12 +42,12 @@ public class ReproductorActivity extends AppCompatActivity {
     //Variables de la activity
     private String url_cancion, id;
     private MediaPlayer mediaPlayer;
-    private List<Cancion> listaCanciones;
     private boolean firstTime;
     Runnable runnable;
     Handler handler;
     int minutes, seconds;
     Cancion cancion;
+    private CancionViewModel mCancionViewModel;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -57,7 +59,8 @@ public class ReproductorActivity extends AppCompatActivity {
         //Obtiene la lista de canciones proporcionada por el intent
         CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
         id = getIntent().getStringExtra("ID");
-        cancion = cancionDatabase.getDao().getCancionPorID(id);
+        mCancionViewModel = new ViewModelProvider(this).get(CancionViewModel.class);
+        cancion = mCancionViewModel.getCancionPorID(id);
 
         //En caso de que las variables no tengan contenido se les inicializa
         // a uno para evitar posibles errores

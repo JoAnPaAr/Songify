@@ -6,15 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDatabase;
-
-import java.util.ArrayList;
+import com.example.songify.viewmodel.CancionViewModel;
 import java.util.List;
 
 /**
@@ -36,7 +37,9 @@ public class FragmentExitos extends Fragment {
     private RecyclerView recyclerExitos;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    List<Cancion> listaExitos;
+    LiveData<List<Cancion>> listaExitos;
+    private CancionViewModel mCancionViewModel;
+
 
     public FragmentExitos() {
         // Required empty public constructor
@@ -78,9 +81,12 @@ public class FragmentExitos extends Fragment {
         //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
         initRecyclerViewCanciones(vista);
 
+        mCancionViewModel.getAllExitos().observe(getViewLifecycleOwner(), cancions -> {
+            mAdapter.swap(listaExitos);
+            mAdapter.notifyDataSetChanged();
+        });
         return vista;
     }
-
 
     //Se inicia la recyclerview
     private void initRecyclerViewCanciones(View vista) {
@@ -92,10 +98,13 @@ public class FragmentExitos extends Fragment {
         layoutManager = new LinearLayoutManager(vista.getContext());
         recyclerExitos.setLayoutManager(layoutManager);
 
-        mAdapter = new RecyclerViewAdapter(new ArrayList<>(), vista.getContext());
+        mCancionViewModel = new ViewModelProvider(this).get(CancionViewModel.class);
+        mAdapter = new RecyclerViewAdapter(new MutableLiveData<List<Cancion>>(), vista.getContext());
 
-        CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
-        mAdapter.swap(cancionDatabase.getDao().showRanking());
+        listaExitos = mCancionViewModel.getAllExitos();
+        mAdapter.swap(listaExitos);
+
         recyclerExitos.setAdapter(mAdapter);
+
     }
 }

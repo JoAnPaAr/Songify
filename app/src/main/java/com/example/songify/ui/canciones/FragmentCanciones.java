@@ -1,5 +1,7 @@
 package com.example.songify.ui.canciones;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +20,7 @@ import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.viewmodel.CancionViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +44,8 @@ public class FragmentCanciones extends Fragment {
     private RecyclerView recyclerCanciones;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    List<Cancion> listaCanciones;
+    LiveData<List<Cancion>> listaCanciones;
+    private CancionViewModel mCancionViewModel;
 
     public FragmentCanciones() {
         // Required empty public constructor
@@ -80,6 +87,10 @@ public class FragmentCanciones extends Fragment {
         //En este metodo se invoca al metodo que vincula la RecyclerView con su layout
         initRecyclerViewCanciones(vista);
 
+        mCancionViewModel.getAllCanciones().observe(getViewLifecycleOwner(), cancions -> {
+            mAdapter.swap(listaCanciones);
+            mAdapter.notifyDataSetChanged();
+        });
         return vista;
     }
 
@@ -94,19 +105,18 @@ public class FragmentCanciones extends Fragment {
         layoutManager = new LinearLayoutManager(vista.getContext());
         recyclerCanciones.setLayoutManager(layoutManager);
 
-        mAdapter = new RecyclerViewAdapter(new ArrayList<>(), vista.getContext());
+        mCancionViewModel = new ViewModelProvider(this).get(CancionViewModel.class);
+        mAdapter = new RecyclerViewAdapter(new MutableLiveData<List<Cancion>>(), vista.getContext());
 
-        CancionDatabase cancionDatabase = CancionDatabase.getInstance(vista.getContext());
-        mAdapter.swap(cancionDatabase.getDao().getAllCanciones());
+        listaCanciones = mCancionViewModel.getAllCanciones();
+        mAdapter.swap(listaCanciones);
 
         //Se envia la cancion seleccionada al reproductor
         mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                listaCanciones=cancionDatabase.getDao().getAllCanciones();
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
-                final String id = listaCanciones.get(recyclerCanciones.getChildAdapterPosition(view)).getId();
+                final String id = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getId();
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
@@ -119,7 +129,5 @@ public class FragmentCanciones extends Fragment {
             }
         });
         recyclerCanciones.setAdapter(mAdapter);
-
     }
-
 }

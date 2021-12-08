@@ -8,27 +8,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDAO;
 import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.viewmodel.CancionViewModel;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> implements View.OnClickListener {
 
-    List<Cancion> cancionList;
+    LiveData<List<Cancion>> cancionList;
     Context context;
     private View.OnClickListener listener;
+    private CancionDAO mCancionDao;
 
 
-    public RecyclerViewAdapter(List<Cancion> cancionList, Context context) {
+    public RecyclerViewAdapter(LiveData<List<Cancion>> cancionList, Context context) {
         this.cancionList = cancionList;
         this.context = context;
     }
 
-    public RecyclerViewAdapter(List<Cancion> cancionList) {
+    public RecyclerViewAdapter(LiveData<List<Cancion>> cancionList) {
         this.cancionList = cancionList;
     }
 
@@ -45,13 +49,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CancionDatabase cancionDatabase = CancionDatabase.getInstance(this.context);
-        holder.tv_titulo.setText(cancionList.get(position).getTitle());
-        holder.tv_artista.setText(cancionList.get(position).getArtist());
-        holder.tv_duracion.setText(cancionList.get(position).getDuration());
+        holder.tv_titulo.setText(cancionList.getValue().get(position).getTitle());
+        holder.tv_artista.setText(cancionList.getValue().get(position).getArtist());
+        holder.tv_duracion.setText(cancionList.getValue().get(position).getDuration());
         //Se emplea glide para insertar la imagen en iv_cancion_img
-        Glide.with(this.context).load(cancionList.get(position).getPicture()).into(holder.iv_cancion);
+        Glide.with(this.context).load(cancionList.getValue().get(position).getPicture()).into(holder.iv_cancion);
         //Actualizar favoritos
-        if (cancionList.get(position).isFavorito()) {
+        if (cancionList.getValue().get(position).isFavorito()) {
             holder.btn_fav.setBackgroundResource(R.drawable.img_star_on);
         } else {
             holder.btn_fav.setBackgroundResource(R.drawable.img_star);
@@ -59,16 +63,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cancion cancionItem = cancionList.get(holder.getAdapterPosition());
+                Cancion cancionItem = cancionList.getValue().get(holder.getAdapterPosition());
 
                 if (cancionItem.isFavorito()) {
                     cancionItem.setFavorito(false);
                     holder.btn_fav.setBackgroundResource(R.drawable.img_star);
-                    cancionDatabase.getDao().update(cancionItem);
+                    CancionDatabase.databaseWriterExecutor.execute(() -> {
+                        cancionDatabase.getDao().update(cancionItem);
+                    });
                 } else {
                     cancionItem.setFavorito(true);
                     holder.btn_fav.setBackgroundResource(R.drawable.img_star_on);
-                    cancionDatabase.getDao().update(cancionItem);
+                    CancionDatabase.databaseWriterExecutor.execute(() -> {
+                        cancionDatabase.getDao().update(cancionItem);
+                    });
                 }
             }
         });
@@ -76,7 +84,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return cancionList.size();
+        if (cancionList.getValue() != null) {
+            return cancionList.getValue().size();
+        } else {
+            return 0;
+        }
     }
 
     //Metodo que escucha el onClick
@@ -91,7 +103,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public void swap(List<Cancion> dataset) {
+    public void swap(LiveData<List<Cancion>> dataset) {
         cancionList = dataset;
         notifyDataSetChanged();
     }
@@ -111,5 +123,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_duracion = itemView.findViewById(R.id.tv_cancion_duracion);
             btn_fav = itemView.findViewById(R.id.iv_fav_cancion);
         }
+
     }
 }
