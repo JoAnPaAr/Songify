@@ -40,7 +40,7 @@ public class ReproductorActivity extends AppCompatActivity {
 
 
     //Variables de la activity
-    private String url_cancion, id;
+    private String url_cancion, id,title,artist,duration,picture;
     private MediaPlayer mediaPlayer;
     private boolean firstTime;
     Runnable runnable;
@@ -57,10 +57,15 @@ public class ReproductorActivity extends AppCompatActivity {
         //Inicializando las variables con los valores proporcionados del intent
 
         //Obtiene la lista de canciones proporcionada por el intent
-        CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
         id = getIntent().getStringExtra("ID");
+        title = getIntent().getStringExtra("TITLE");
+        artist = getIntent().getStringExtra("ARTIST");
+        duration = getIntent().getStringExtra("DURATION");
+        picture = getIntent().getStringExtra("PICTURE");
+        url_cancion = getIntent().getStringExtra("PREVIEW");
+
+        cancion = new Cancion(id,title,artist,duration,picture,url_cancion);
         mCancionViewModel = new ViewModelProvider(this).get(CancionViewModel.class);
-        cancion = mCancionViewModel.getCancionPorID(id);
 
         //En caso de que las variables no tengan contenido se les inicializa
         // a uno para evitar posibles errores

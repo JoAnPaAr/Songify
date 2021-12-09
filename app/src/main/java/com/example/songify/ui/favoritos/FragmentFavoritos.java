@@ -111,13 +111,23 @@ public class FragmentFavoritos extends Fragment {
 
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
                 final String id = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getId();
+                final String titulo = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getTitle();
+                final String artista = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getArtist();
+                final String duracion = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getDuration();
+                final String picture = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getPicture();
+                final String preview = listaFavoritos.getValue().get(recyclerFavoritos.getChildAdapterPosition(view)).getPreview();
+
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
 
                 //Pasa el valor del id de la cancion seleccionada por el usuario
                 intent.putExtra("ID", id);
-
+                intent.putExtra("TITLE", titulo);
+                intent.putExtra("ARTIST", artista);
+                intent.putExtra("DURATION", duracion);
+                intent.putExtra("PICTURE", picture);
+                intent.putExtra("PREVIEW", preview);
                 //Invoca la nueva activity
                 startActivity(intent);
             }

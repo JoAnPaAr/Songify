@@ -137,6 +137,10 @@ public class Cancion implements Serializable {
     }
 
     @Ignore
+    public Cancion(){
+    }
+
+    @Ignore
     public Cancion(String platform, String id, String title, String artist, String artistLink, String album, String albumLink, String isrc, String duration, String trackLink, String preview, String picture, Integer addedDate, String position, List<Object> shareUrls) {
         this.platform = platform;
         this.id = id;

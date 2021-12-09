@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             //Cuando se implemente liveData
             case R.id.menu_aToz:
                 //ordena de A a Z
-                //Collections.sort(mCancionDao, Cancion.CancionAZComparator);
+               // Collections.sort(mCancionViewModel, Cancion.CancionAZComparator);
                 Toast.makeText(this, "Ordenado de A->Z", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_zToa:

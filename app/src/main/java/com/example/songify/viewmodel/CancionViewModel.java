@@ -39,10 +39,6 @@ public class CancionViewModel extends AndroidViewModel {
         return mListaExitos;
     }
 
-    public Cancion getCancionPorID(String id) {
-        return mRepository.getCancionPorID(id);
-    }
-
     public void insert(Cancion cancion) {
         mRepository.insert(cancion);
     }

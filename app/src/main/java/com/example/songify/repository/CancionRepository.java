@@ -14,6 +14,7 @@ import java.util.concurrent.Executor;
 
 public class CancionRepository {
 
+    private Cancion c;
     private CancionDAO mCancionDao;
     private LiveData<List<Cancion>> mListaCanciones;
     private LiveData<List<Cancion>> mListaFavoritos;
@@ -22,6 +23,7 @@ public class CancionRepository {
     public CancionRepository(Application application) {
         CancionDatabase db = CancionDatabase.getInstance(application);
         mCancionDao = db.getDao();
+        c = new Cancion();
         mListaCanciones = mCancionDao.getAllCanciones();
         mListaFavoritos = mCancionDao.getAllFavorites();
         mListaExitos = mCancionDao.showRanking();
@@ -39,9 +41,8 @@ public class CancionRepository {
         return mListaExitos;
     }
 
-    public Cancion getCancionPorID(String id) {
-        //return CancionDatabase.databaseWriterExecutor.execute(()->mCancionDao.getCancionPorID(id));
-        return mCancionDao.getCancionPorID(id);
+    public void setCancion(Cancion cancion){
+        c = cancion;
     }
 
     public void insert(Cancion cancion) {

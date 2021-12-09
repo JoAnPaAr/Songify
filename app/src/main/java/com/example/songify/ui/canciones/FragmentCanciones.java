@@ -117,12 +117,23 @@ public class FragmentCanciones extends Fragment {
             public void onClick(View view) {
                 //Se almacena en estas variables los datos de la cancion seleccionada por el usuario
                 final String id = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getId();
+                final String titulo = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getTitle();
+                final String artista = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getArtist();
+                final String duracion = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getDuration();
+                final String picture = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getPicture();
+                final String preview = listaCanciones.getValue().get(recyclerCanciones.getChildAdapterPosition(view)).getPreview();
+
                 //Se obtiene el contexto del main activity
                 Intent intent = new Intent(view.getContext(),
                         ReproductorActivity.class);
 
                 //Pasa el valor del id de la cancion seleccionada por el usuario
                 intent.putExtra("ID", id);
+                intent.putExtra("TITLE", titulo);
+                intent.putExtra("ARTIST", artista);
+                intent.putExtra("DURATION", duracion);
+                intent.putExtra("PICTURE", picture);
+                intent.putExtra("PREVIEW", preview);
 
                 //Invoca la nueva activity
                 startActivity(intent);
