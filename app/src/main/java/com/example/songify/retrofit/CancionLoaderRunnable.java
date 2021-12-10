@@ -1,4 +1,4 @@
-package com.example.songify.load;
+package com.example.songify.retrofit;
 
 import com.example.songify.AppExecutors;
 import com.example.songify.roomdb.Cancion;
@@ -13,11 +13,11 @@ import java.util.List;
 public class CancionLoaderRunnable implements Runnable {
 
     private final InputStream mInFile;
-    private final OnResponseLoadedListener mOnResponseLoadedListener;
+    private final OnCancionesLoadedListener mOnCancionesLoadedListener;
 
-    public CancionLoaderRunnable(InputStream inFile, OnResponseLoadedListener onResponseLoadedListener) {
+    public CancionLoaderRunnable(InputStream inFile, OnCancionesLoadedListener onCancionesLoadedListener) {
         mInFile = inFile;
-        mOnResponseLoadedListener = onResponseLoadedListener;
+        mOnCancionesLoadedListener = onCancionesLoadedListener;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CancionLoaderRunnable implements Runnable {
         AppExecutors.getInstance().mainThread().execute(new Runnable() {
             @Override
             public void run() {
-                mOnResponseLoadedListener.onResponseLoaded(listaCanciones);
+                mOnCancionesLoadedListener.onCancionesLoaded(listaCanciones);
 
             }
         });

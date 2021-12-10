@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.songify.R;
 import com.example.songify.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
+import com.example.songify.retrofit.CancionesNetworkDataSource;
 import com.example.songify.roomdb.Cancion;
 import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.viewmodel.CancionRepository;
 import com.example.songify.viewmodel.CancionViewModel;
 
 import java.util.ArrayList;
@@ -46,6 +49,7 @@ public class FragmentCanciones extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     LiveData<List<Cancion>> listaCanciones;
     private CancionViewModel mCancionViewModel;
+    private CancionRepository mRepository;
 
     public FragmentCanciones() {
         // Required empty public constructor
@@ -93,7 +97,6 @@ public class FragmentCanciones extends Fragment {
         });
         return vista;
     }
-
 
     //Se inicia la recyclerview
     private void initRecyclerViewCanciones(View vista) {

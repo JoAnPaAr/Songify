@@ -1,10 +1,9 @@
-package com.example.songify.repository;
+package com.example.songify.retrofit;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.songify.AppExecutors;
-import com.example.songify.retrofit.CancionesNetworkLoaderRunnable;
 import com.example.songify.roomdb.Cancion;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 public class CancionesNetworkDataSource {
     private static CancionesNetworkDataSource sInstance;
 
+    //LiveData para almacenar las canciones descargadas
     private final MutableLiveData<List<Cancion>> mDownloadedCanciones;
 
     private CancionesNetworkDataSource(){
@@ -28,7 +28,6 @@ public class CancionesNetworkDataSource {
     public LiveData<List<Cancion>> getCurrentCanciones(){ return mDownloadedCanciones;}
 
     public void fetchCanciones(){
-      //AppExecutors.getInstance().networkIO().execute(new ReposNetworkLoaderRunnable(username, repos -> mDownloadedRepos.postValue(repos.toArray(new Repo[0]))));
         AppExecutors.getInstance().networkIO().execute(new CancionesNetworkLoaderRunnable(listaCanciones -> mDownloadedCanciones.postValue(listaCanciones)));
     }
 }

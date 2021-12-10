@@ -1,8 +1,9 @@
 package com.example.songify.retrofit;
 
 import com.example.songify.AppExecutors;
-import com.example.songify.load.OnResponseLoadedListener;
+import com.example.songify.MainActivity;
 import com.example.songify.roomdb.Cancion;
+import com.example.songify.roomdb.CancionDatabase;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,29 +17,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CancionesNetworkLoaderRunnable implements Runnable {
 
-    private final OnResponseLoadedListener mOnCancionesLoadedListener;
-    private String BASE_URL = "https://raw.githubusercontent.com/";
+    private final OnCancionesLoadedListener mOnCancionesLoadedListener;
 
-    public CancionesNetworkLoaderRunnable(OnResponseLoadedListener onResponseLoadedListener) {
-        mOnCancionesLoadedListener = onResponseLoadedListener;
+    public CancionesNetworkLoaderRunnable(OnCancionesLoadedListener onCancionesLoadedListener) {
+        mOnCancionesLoadedListener = onCancionesLoadedListener;
     }
+
+
+    //
+    //
+    //        service.getAllCanciones().enqueue(new Callback<List<Cancion>>() {
+    //            @Override
+    //            public void onResponse(Call<List<Cancion>> call, Response<List<Cancion>> response) {
+    //                mCancionViewModel.bulkInsert(response.body());
+    //            }
+    //
+    //            @Override
+    //            public void onFailure(Call<List<Cancion>> call, Throwable t) {
+    //                t.printStackTrace();
+    //            }
+    //        });
 
     public void run(){
         //Inicia la instancia de retrofit
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://raw.githubusercontent.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         CancionesService service = retrofit.create(CancionesService.class);
-        Call<List<Cancion>> call = service.getAllCanciones();
-        try{
-            Response<List<Cancion>> response = call.execute();
-            List<Cancion> cancions = response.body() == null ? new ArrayList<>() : response.body();
-            AppExecutors.getInstance().mainThread().execute(()->mOnCancionesLoadedListener.onResponseLoaded(cancions));
+        service.getAllCanciones().enqueue(new Callback<List<Cancion>>() {
+            @Override
+            public void onResponse(Call<List<Cancion>> call, Response<List<Cancion>> response) {
+               AppExecutors.getInstance().mainThread().execute(()->mOnCancionesLoadedListener.onCancionesLoaded(response.body()));
+            }
 
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<List<Cancion>> call, Throwable t) {
+
+            }
+        });
 
     }
 

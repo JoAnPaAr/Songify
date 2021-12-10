@@ -6,14 +6,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.songify.repository.CancionRepository;
 import com.example.songify.roomdb.Cancion;
 
 import java.util.List;
 
 public class CancionViewModel extends AndroidViewModel {
     private CancionRepository mRepository;
-    private MutableLiveData<List<Cancion>> data = new MutableLiveData<>();
+    private MutableLiveData<List<Cancion>> cancionMutableLiveData = new MutableLiveData<>();
 
     private final LiveData<List<Cancion>> mListaCanciones;
     private final LiveData<List<Cancion>> mListaFavoritos;
@@ -25,6 +24,10 @@ public class CancionViewModel extends AndroidViewModel {
         mListaCanciones = mRepository.getAllCanciones();
         mListaFavoritos = mRepository.getAllFavoritos();
         mListaExitos = mRepository.getAllExitos();
+    }
+
+    public void init() {
+        mRepository.checkFetch();
     }
 
     public LiveData<List<Cancion>> getAllCanciones() {
@@ -39,6 +42,7 @@ public class CancionViewModel extends AndroidViewModel {
         return mListaExitos;
     }
 
+    //Consultas a la base de datos
     public void insert(Cancion cancion) {
         mRepository.insert(cancion);
     }
@@ -49,6 +53,10 @@ public class CancionViewModel extends AndroidViewModel {
 
     public void borrar() {
         mRepository.borrar();
+    }
+
+    public void bulkInsert(List<Cancion> listaCanciones) {
+        mRepository.bulkInsert(listaCanciones);
     }
 
 }
