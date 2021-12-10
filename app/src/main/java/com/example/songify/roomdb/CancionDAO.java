@@ -1,5 +1,7 @@
 package com.example.songify.roomdb;
 
+import static androidx.room.OnConflictStrategy.REPLACE;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -21,6 +23,9 @@ public interface CancionDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCancion(Cancion cancion);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void bulkInsert(List<Cancion> cancions);
 
     @Delete
     void delete(Cancion cancion);
