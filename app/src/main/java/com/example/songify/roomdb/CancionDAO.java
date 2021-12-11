@@ -19,22 +19,6 @@ public interface CancionDAO {
     @Query("SELECT * FROM cancion")
     LiveData<List<Cancion>> getAllCanciones();
 
-    //Obtiene todas las canciones
-    @Query("SELECT * FROM cancion ORDER BY titulo DESC")
-    LiveData<List<Cancion>> getAllCancionesAZ();
-
-    //Obtiene todas las canciones
-    @Query("SELECT * FROM cancion ORDER BY titulo ASC")
-    LiveData<List<Cancion>> getAllCancionesZA();
-
-    //Obtiene todas las canciones
-    @Query("SELECT * FROM cancion ORDER BY artista DESC")
-    LiveData<List<Cancion>> getAllCancionesArtist();
-
-    //Obtiene todas las canciones
-    @Query("SELECT * FROM cancion ORDER BY duracion DESC")
-    LiveData<List<Cancion>> getAllCancionesTiempo();
-
     //Obtiene las canciones favoritas
     @Query("SELECT * FROM cancion WHERE fav = 1 ORDER BY titulo DESC")
     LiveData<List<Cancion>> getAllFavorites();

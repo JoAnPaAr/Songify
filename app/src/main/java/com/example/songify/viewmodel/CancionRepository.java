@@ -19,6 +19,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import kotlin.jvm.functions.FunctionN;
 import retrofit2.Call;
@@ -34,6 +39,7 @@ public class CancionRepository {
     private LiveData<List<Cancion>> mListaCanciones;
     private LiveData<List<Cancion>> mListaFavoritos;
     private LiveData<List<Cancion>> mListaExitos;
+    private MutableLiveData<List<Cancion>> data;
     private long lastUpdateTimeMillis;
 
     public CancionRepository(Application application) {

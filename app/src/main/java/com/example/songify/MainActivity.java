@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         CancionDatabase cancionDatabase = CancionDatabase.getInstance(this);
         switch (item.getItemId()) {
             //Cuando se implemente liveData
-            case R.id.menu_aToz:
+            /*case R.id.menu_aToz:
                 //ordena de A a Z
                 // Collections.sort(mCancionViewModel, Cancion.CancionAZComparator);
                 Toast.makeText(this, "Ordenado de A->Z", Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 //ordena por Artistas
                 //Collections.sort(mCancionDao,Cancion.CancionAZArtistComparator);
                 Toast.makeText(this, "Ordenado por Artistas", Toast.LENGTH_SHORT).show();
-                return true;
+                return true;*/
             case R.id.menu_loadData:
                 //carga todos los datos
                 fillLista();
