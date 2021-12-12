@@ -1,0 +1,33 @@
+@startuml
+class com.DB.Cancion {
+}
+class Activities.MainActivity {
+}
+class Activities.ReproductorActivity {
+}
+interface Retrofit.CancionesService {
+}
+abstract com.DB.CancionDatabase{
+}
+interface com.DB.CancionDAO{
+}
+
+UI.RecyclerViewAdapter <|-- UI.FragmentCanciones
+UI.RecyclerViewAdapter <|-- UI.FragmentFavoritos
+UI.RecyclerViewAdapter <|-- UI.FragmentExitos
+
+UI.FragmentCanciones<|--CancionViewModel:getAllCanciones()
+UI.FragmentFavoritos<|--CancionViewModel:getAllFavoritos()
+UI.FragmentExitos<|--CancionViewModel:getAllExitos()
+
+CancionViewModel<|--CancionRepository
+
+CancionRepository<|--com.DB.CancionDAO:insert()
+CancionRepository<|--com.DB.CancionDAO:update()
+CancionRepository<|--com.DB.CancionDAO:borrar()
+CancionRepository<|--com.DB.CancionDAO:bulkInsert()
+com.DB.CancionDAO*--com.DB.CancionDatabase
+CancionRepository<|--RRetrofit.Retrofit:callRetrofit()
+
+
+@enduml
