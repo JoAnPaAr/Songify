@@ -1,5 +1,5 @@
 
-package com.example.songify.roomdb;
+package com.example.songify.data;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

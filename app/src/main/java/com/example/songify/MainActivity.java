@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,19 +14,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.songify.retrofit.CancionesService;
-import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.data.CancionDatabase;
 import com.example.songify.viewmodel.CancionViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 

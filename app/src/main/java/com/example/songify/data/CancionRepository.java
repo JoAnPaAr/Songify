@@ -1,31 +1,14 @@
-package com.example.songify.viewmodel;
+package com.example.songify.data;
 
 import android.app.Application;
-import android.util.Log;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.example.songify.AppExecutors;
-import com.example.songify.retrofit.CancionesNetworkDataSource;
-import com.example.songify.retrofit.CancionesService;
-import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDAO;
-import com.example.songify.roomdb.CancionDatabase;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-import kotlin.jvm.functions.FunctionN;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

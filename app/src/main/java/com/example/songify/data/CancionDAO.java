@@ -1,6 +1,4 @@
-package com.example.songify.roomdb;
-
-import static androidx.room.OnConflictStrategy.REPLACE;
+package com.example.songify.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

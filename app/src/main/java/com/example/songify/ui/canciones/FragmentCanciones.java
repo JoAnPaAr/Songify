@@ -1,7 +1,5 @@
 package com.example.songify.ui.canciones;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,21 +9,17 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.songify.R;
-import com.example.songify.RecyclerViewAdapter;
+import com.example.songify.ui.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
-import com.example.songify.retrofit.CancionesNetworkDataSource;
-import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDatabase;
-import com.example.songify.viewmodel.CancionRepository;
+import com.example.songify.data.Cancion;
+import com.example.songify.data.CancionRepository;
 import com.example.songify.viewmodel.CancionViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

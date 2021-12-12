@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.songify.R;
-import com.example.songify.RecyclerViewAdapter;
+import com.example.songify.ui.RecyclerViewAdapter;
 import com.example.songify.ReproductorActivity;
-import com.example.songify.roomdb.Cancion;
+import com.example.songify.data.Cancion;
 import com.example.songify.viewmodel.CancionViewModel;
 import java.util.List;
 

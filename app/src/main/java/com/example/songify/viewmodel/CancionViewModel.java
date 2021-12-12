@@ -6,7 +6,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.songify.roomdb.Cancion;
+import com.example.songify.data.Cancion;
+import com.example.songify.data.CancionRepository;
 
 import java.util.List;
 

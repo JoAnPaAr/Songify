@@ -1,6 +1,6 @@
-package com.example.songify.retrofit;
+package com.example.songify.data;
 
-import com.example.songify.roomdb.Cancion;
+import com.example.songify.data.Cancion;
 
 import java.util.List;
 

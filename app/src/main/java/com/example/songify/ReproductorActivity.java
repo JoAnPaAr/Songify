@@ -16,12 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDatabase;
+import com.example.songify.data.Cancion;
 import com.example.songify.viewmodel.CancionViewModel;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ReproductorActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.songify;
+package com.example.songify.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,10 +12,10 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.songify.roomdb.Cancion;
-import com.example.songify.roomdb.CancionDAO;
-import com.example.songify.roomdb.CancionDatabase;
-import com.example.songify.viewmodel.CancionViewModel;
+import com.example.songify.R;
+import com.example.songify.data.Cancion;
+import com.example.songify.data.CancionDAO;
+import com.example.songify.data.CancionDatabase;
 
 import java.util.List;
 
